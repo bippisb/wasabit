@@ -1,5 +1,5 @@
 import json
-
+import os
 import boto3
 
 # from botocore.exceptions import NoCredentialsError
@@ -9,10 +9,14 @@ def wasabi_auth():
     """
     function to authenticate user on wasabi
     """
-    wasabi_keys = open("wasabi_keys.cfg")
-    wasabi = json.load(wasabi_keys)
-    WASABI_ACCESS_KEY = wasabi["key"]
-    WASABI_SECRET_KEY = wasabi["secret"]
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    config_file = os.path.join(current_dir, 'wasabi_keys.cfg')
+
+    with open(config_file, 'r') as wasabi_keys:
+        wasabi = json.load(wasabi_keys)
+        WASABI_ACCESS_KEY = wasabi["key"]
+        WASABI_SECRET_KEY = wasabi["secret"]
+
 
     # Creating a Session on Wasabi
     # mentioning the endpoint to wasabi, this is insane

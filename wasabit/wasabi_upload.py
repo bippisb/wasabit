@@ -2,7 +2,7 @@
 import boto3
 from boto3.s3.transfer import TransferConfig
 from botocore.exceptions import NoCredentialsError, ClientError
-from wasabi_auth import wasabi_auth
+from wasabit.wasabi_auth import wasabi_auth
 import os
 from botocore.exceptions import NoCredentialsError
 
