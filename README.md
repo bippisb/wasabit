@@ -13,8 +13,8 @@ pip install git+https://github.com/bippisb/wasabit.git
 ## Usage
 
 ```python
-from wasabit import wasabi_auth
-from wasabit import upload_to_wasabi
+from wasabit.wasabi_auth import wasabi_auth
+from wasabit.wasabi_upload import upload_to_wasabi
 
 # returns 's3 client'
 s3 = wasabi_auth()
