@@ -7,7 +7,7 @@ This package offers a solution for uploading files, creating folders, and authen
 Use the package manager [pip](https://github.com/bippisb/wasabit.git) to install wasabit.
 
 ```bash
-pip install git+https://github.com/bippisb/wasabit.git
+pip install wasabit
 ```
 
 ## Usage
