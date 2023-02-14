@@ -1,5 +1,5 @@
+LICENSE
 README.md
-pyproject.toml
 setup.py
 wasabit/__init__.py
 wasabit/wasabi_auth.py
