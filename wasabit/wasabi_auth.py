@@ -5,29 +5,36 @@ import boto3
 # from botocore.exceptions import NoCredentialsError
 
 
-def wasabi_auth():
+def wasabi_auth(ACCESS_KEY, WASABI_SECRET):
     """
-    function to authenticate user on wasabi
+    Creates an authenticated client for interacting with an S3 bucket hosted on the Wasabi cloud storage service.
+    
+    Args:
+    ACCESS_KEY (str): Wasabi Access Key
+    WASABI_SECRET (str): Wasabi Secret Key
+    
+    Returns:
+    s3 (boto3.client): An authenticated client object for interacting with Wasabi S3
+    
     """
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    config_file = os.path.join(current_dir, 'wasabi_keys.cfg')
 
-    with open(config_file, 'r') as wasabi_keys:
-        wasabi = json.load(wasabi_keys)
-        WASABI_ACCESS_KEY = wasabi["key"]
-        WASABI_SECRET_KEY = wasabi["secret"]
+    # Set the Wasabi Access Key and Secret Key
+    WASABI_ACCESS_KEY = ACCESS_KEY
+    WASABI_SECRET_KEY = WASABI_SECRET
 
-
-    # Creating a Session on Wasabi
-    # mentioning the endpoint to wasabi, this is insane
-
+    # Create a session object using the Wasabi Access Key and Secret Key
     session = boto3.Session(
         aws_access_key_id=WASABI_ACCESS_KEY,
         aws_secret_access_key=WASABI_SECRET_KEY,
     )
+    
+    # Create an S3 client object using the session object and the Wasabi endpoint URL
     s3 = session.client(
         "s3", endpoint_url="https://s3.ap-southeast-1.wasabisys.com"
     )
+    
+    # Return the S3 client object
     return s3
+
 def wasabi_auth_client():
     pass
