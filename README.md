@@ -16,8 +16,12 @@ pip install wasabit
 from wasabit.wasabi_auth import wasabi_auth
 from wasabit.wasabi_upload import upload_to_wasabi
 
+ACCESS_KEY = "YOUR WASABI_ACCESS_KEY"
+WASABI_SECRET = "YOUR WASABI_SECRET_KEY"
+
+
 # returns 's3 client'
-s3 = wasabi_auth()
+s3 = wasabi_auth(ACCESS_KEY, WASABI_SECRET)
 
 # 'upload data to wasabi'
 upload_to_wasabi(folder_path, bucket_name,wasabi_path)
