@@ -19,12 +19,12 @@ from wasabit.wasabi_upload import upload_to_wasabi
 ACCESS_KEY = "YOUR WASABI_ACCESS_KEY"
 WASABI_SECRET = "YOUR WASABI_SECRET_KEY"
 
-
-# returns 's3 client'
-s3 = wasabi_auth(ACCESS_KEY, WASABI_SECRET)
+bucket_name = 'dev-data'
+wasabi_path = 'DGCIS_EXPORT_ALL_HS/processed/Final/'
+folder_path = "D:/Saurabh/data/processed/Final/"
 
 # 'upload data to wasabi'
-upload_to_wasabi(folder_path, bucket_name,wasabi_path)
+upload_to_wasabi(folder_path, bucket_name,wasabi_path,access_key = ACCESS_KEY, secret_key = WASABI_SECRET)
 
 ```
 
