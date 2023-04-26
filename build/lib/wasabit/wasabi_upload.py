@@ -5,11 +5,7 @@ from botocore.exceptions import NoCredentialsError, ClientError
 from wasabit.wasabi_auth import wasabi_auth
 import os
 from botocore.exceptions import NoCredentialsError
-
-import os
 from pathlib import Path
-from typing import Optional
-import boto3
 
 
 
@@ -52,6 +48,8 @@ def upload_to_wasabi(folder_path: str, bucket_name: str, wasabi_path: str, acces
 
         
 
+
+
 def file_upload_to_wasabi(csv_file_path: str, bucket_name: str, wasabi_path: str, access_key, secret_key) -> None:
     """
     Uploads a specific CSV file to a specified Wasabi bucket and subfolder or prefix.
@@ -71,7 +69,7 @@ def file_upload_to_wasabi(csv_file_path: str, bucket_name: str, wasabi_path: str
         s3 = wasabi_auth(access_key,secret_key)
         # get the file name from the full path
         file_name = os.path.basename(csv_file_path)
-        remote_file = wasabi_path + file_name
+        remote_file = os.path.join(wasabi_path, file_name)
         # upload the file
         s3.upload_file(csv_file_path, bucket_name, remote_file, Config=transfer_config)
         print(f'{csv_file_path} is uploaded to {remote_file}')
@@ -86,6 +84,13 @@ def file_upload_to_wasabi(csv_file_path: str, bucket_name: str, wasabi_path: str
             print(f'An error occurred: {e}')
     except Exception as e:
         print(f'An error occurred: {e}')
+
+
+
+import os
+import boto3
+from botocore.exceptions import NoCredentialsError, ClientError
+from pathlib import Path
 
 
 def upload_folder_to_wasabi(local_folder_path: str, bucket_name: str, wasabi_path: str, access_key: str, secret_key: str) -> None:
@@ -117,6 +122,10 @@ def upload_folder_to_wasabi(local_folder_path: str, bucket_name: str, wasabi_pat
                 local_file_path = os.path.join(root, file)
                 relative_path = os.path.relpath(local_file_path, local_folder_path)
                 remote_file_path = os.path.join(wasabi_path, relative_path).replace(os.sep, '/')
+                
+                # create the target folder if it does not already exist
+                if wasabi_path:
+                    s3.put_object(Bucket=bucket_name, Key=f"{wasabi_path}/")
                 
                 # upload the file
                 s3.upload_file(local_file_path, bucket_name, remote_file_path, Config=transfer_config)
