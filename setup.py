@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='wasabit',
-    version='0.2',
+    version='0.2.1',
     description='This package offers a solution for uploading files, creating folders, and authenticating with Wasabi',
     author='Saurabh Harak',
     author_email='saurabh_harak@isb.edu',
