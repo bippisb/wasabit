@@ -5,8 +5,6 @@ import boto3
 # from botocore.exceptions import NoCredentialsError
 
 
-import boto3
-
 def wasabi_auth(ACCESS_KEY, WASABI_SECRET):
     """
     Creates an authenticated client for interacting with an S3 bucket hosted on the Wasabi cloud storage service.
